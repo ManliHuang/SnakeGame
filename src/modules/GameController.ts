@@ -49,10 +49,25 @@ class GameController {
                 break
         }
 
-        this.snake.X = X;
-        this.snake.Y = Y;
+        this.foodIsEaten(X, Y)
+
+        try {
+            this.snake.X = X;
+            this.snake.Y = Y;
+        } catch (error) {
+            alert(error);
+            this.isLive = false;
+        }
 
         this.isLive && setTimeout(this.move.bind(this), 300 - (this.scoreBoard.level - 1) * 30)
+    }
+
+    foodIsEaten(x: number, y: number) {
+        if (x === this.food.X && y === this.food.Y) {
+            this.food.change();
+            this.snake.addBody();
+            this.scoreBoard.addScore();
+        }
     }
 }
 
