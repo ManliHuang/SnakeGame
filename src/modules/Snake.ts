@@ -25,8 +25,17 @@ class Snake {
         if (value < 0 || value > 290) {
             throw new Error('Game Over!')
         }
-        this.head.style.left = value + 'px';
+
+        if (this.bodies[1] && (this.bodies[1] as HTMLElement).offsetLeft === value) {
+            if (value > this.X) {
+                value = this.X - 10
+            } else {
+                value = this.X + 10
+            }
+        }
+
         this.moveBody();
+        this.head.style.left = value + 'px';
     }
 
     set Y(value: number) {
@@ -37,8 +46,17 @@ class Snake {
         if (value < 0 || value > 290) {
             throw new Error('Game Over!')
         }
-        this.head.style.top = value + 'px';
+
+        if (this.bodies[1] && (this.bodies[1] as HTMLElement).offsetTop === value) {
+           if (value > this.Y) {
+               value = this.Y - 10
+           } else {
+               value = this.Y + 10
+           }
+        }
+
         this.moveBody()
+        this.head.style.top = value + 'px';
     }
 
     addBody() {
