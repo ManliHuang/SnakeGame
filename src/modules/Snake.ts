@@ -36,6 +36,7 @@ class Snake {
 
         this.moveBody();
         this.head.style.left = value + 'px';
+        this.selfCollapse();
     }
 
     set Y(value: number) {
@@ -57,6 +58,7 @@ class Snake {
 
         this.moveBody()
         this.head.style.top = value + 'px';
+        this.selfCollapse();
     }
 
     addBody() {
@@ -72,6 +74,15 @@ class Snake {
             const currentBodyElement = this.bodies[i] as HTMLElement;
             currentBodyElement.style.left = X + 'px';
             currentBodyElement.style.top = Y + 'px';
+        }
+    }
+
+    selfCollapse() {
+        for (let i = 1; i < this.bodies.length; i++) {
+            let body = this.bodies[i] as HTMLElement;
+            if (this.X === body.offsetLeft && this.Y === body.offsetTop) {
+                throw new Error('Game Over!')
+            }
         }
     }
 }
