@@ -25,8 +25,10 @@ class Snake {
         if (value < 0 || value > 290) {
             throw new Error('Game Over!')
         }
-        this.head.style.left = value + 'px'
+        this.head.style.left = value + 'px';
+        this.moveBody();
     }
+
     set Y(value: number) {
         if (this.Y === value) {
             return;
@@ -35,11 +37,24 @@ class Snake {
         if (value < 0 || value > 290) {
             throw new Error('Game Over!')
         }
-        this.head.style.top = value + 'px'
+        this.head.style.top = value + 'px';
+        this.moveBody()
     }
 
     addBody() {
         this.snakeElement.insertAdjacentHTML('beforeend', "<div></div>")
+    }
+
+    moveBody() {
+        for (let i = this.bodies.length - 1; i > 0; i--) {
+            const bodyElement: HTMLElement = this.bodies[i - 1] as HTMLElement;
+            let X = bodyElement.offsetLeft;
+            let Y = bodyElement.offsetTop;
+
+            const currentBodyElement = this.bodies[i] as HTMLElement;
+            currentBodyElement.style.left = X + 'px';
+            currentBodyElement.style.top = Y + 'px';
+        }
     }
 }
 
