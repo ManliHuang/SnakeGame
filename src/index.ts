@@ -1,5 +1,5 @@
 import './style/index.less';
-
+import GameController from "./modules/GameController";
 
 
 // const food = new Food();
@@ -14,4 +14,5 @@ import './style/index.less';
 //     score.addScore();
 // }
 
+new GameController();
 
